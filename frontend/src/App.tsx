@@ -1,14 +1,19 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
-import AddUser from "./components/AddUser";
+import "./App.css";
+import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/react";
 
 function App() {
   return (
-    <div>
-      <Routes>
-        <Route path="/" element={<AddUser />} />
-      </Routes>
-    </div>
+    <>
+      <header>
+        <Show when="signed-out">
+          <SignInButton />
+          <SignUpButton />
+        </Show>
+        <Show when="signed-in">
+          <UserButton />
+        </Show>
+      </header>
+    </>
   );
 }
 

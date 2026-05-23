@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import mongoose from "mongoose";
 import cors from "cors";
-import customerRouter from "../src/router/customerRouter";
+import customerRouter from "../src/routers/customerRouter";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -13,8 +13,9 @@ app.use(express.json());
 app.use(cors());
 app.use("/api/v1/customer", customerRouter);
 
-mongoose.connect(DB_URL).then(() => {
-  console.log("DB is connected");
+mongoose.connect(DB_URL).then(async () => {
+  const conn = await mongoose.connect(DB_URL);
+  console.log("DB is connected", conn.connection.host);
 });
 
 app.listen(PORT, () => {
